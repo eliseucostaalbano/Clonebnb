@@ -1,24 +1,19 @@
 import Header from "./components/Header"
-import Item from "./components/Item"
+import Home from "./Pages/Home"
+import Login from "./Pages/login"
+import { BrowserRouter, Routes, Route  } from "react-router-dom"
+
 function App() {
 
   return (
-    <>
-    <Header />
-    <section>
-      <div  className=" grid grid-cols-[repeat(auto-fit,minmax(225px,1fr))] mx-auto max-w-7xl p-8">
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      </div>
-    </section>
-    
-    </>
+    <BrowserRouter>
+      <Header />
+
+    <Routes>
+       <Route path="/" element={<Home />} />
+       <Route path="/login" element={<Login />} />
+    </Routes>
+    </BrowserRouter>
   )
 }
 
