@@ -16,7 +16,8 @@ const Item = () => {
 
       <p>
         <span className="font-semibold"> R$ 500</span> por noite
-      </p></div>
+      </p>
+      </div>
   )
 }
 
