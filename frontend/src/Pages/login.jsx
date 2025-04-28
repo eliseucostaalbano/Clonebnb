@@ -1,12 +1,28 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const lidarSubmit = (e) => {
+  const lidarSubmit = async (e) => {
     e.preventDefault();
+    if (email && senha) {
+      try {
+        const {data: User} = await axios.post("/users/login", {
+      email,
+      senha,
+    })
+    console.log(User);
+      } catch (error) {
+        alert(`Deu um erro ao logar: ${error.response.data}`);
+      }
+      
+    }else {
+      alert("Preencha todos os campos!");
+    }
+
   };
   return (
     <section className="flex items-center">
