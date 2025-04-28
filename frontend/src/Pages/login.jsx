@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+
+const Login = ({setUser}) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -14,7 +15,7 @@ const Login = () => {
       email,
       senha,
     })
-    console.log(User);
+    setUser(User);
       } catch (error) {
         alert(`Deu um erro ao logar: ${error.response.data}`);
       }
