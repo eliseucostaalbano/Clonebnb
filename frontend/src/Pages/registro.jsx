@@ -3,39 +3,47 @@ import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 
 
-const Login = ({user, setUser}) => {
+const Registro= ({setUser}) => {
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   const lidarSubmit = async (e) => {
     e.preventDefault();
-    if (email && senha) {
-      try {
-        const {data: User} = await axios.post("/users/login", {
-      email,
-      senha,
-    })
-    setUser(User);
-    setRedirect(true);
-      } catch (error) {
-        alert(`Deu um erro ao logar: ${error.response.data}`);
-      }
+//     if (email && senha) {
+//       try {
+//         const {data: User} = await axios.post("/users/login", {
+//       email,
+//       senha,
+//     })
+//     setUser(User);
+//     setRedirect(true);
+//       } catch (error) {
+//         alert(`Deu um erro ao logar: ${error.response.data}`);
+//       }
       
-    }else {
-      alert("Preencha todos os campos!");
-    }
+//     }else {
+//       alert("Preencha todos os campos!");
+//     }
 
-  };
-  if (redirect || user) return <Navigate to="/" />;
+};
+
+  if (redirect) return <Navigate to="/" />;
   
-
   return (
     <section className="flex items-center">
       <div className="mx-auto flex w-full max-w-96 flex-col items-center gap-4">
-        <h1 className="text-3xl font-bold">Faça seu login</h1>
+        <h1 className="text-3xl font-bold">Faça seu Cadastro</h1>
 
         <form className="flex w-full flex-col gap-2" onSubmit={lidarSubmit}>
+            <input
+                type="text"
+                placeholder="Digite seu nome"
+                className="w-full rounded-full border border-gray-300 px-4 py-2"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+            />
           <input
             type="email"
             placeholder="Digite seu e-mail"
@@ -53,14 +61,14 @@ const Login = ({user, setUser}) => {
           />
 
           <button className="bg-primary-400 w-full cursor-pointer rounded-full border border-gray-300 px-4 py-2 font-bold text-white">
-            Login
+            Registrar
           </button>
         </form>
 
         <p>
-          Ainda não tem uma conta?
-          <Link to="/registro" className="font-semibold underline">
-            Registre-se aqui!
+          Já tem uma conta?
+          <Link to="/login" className="font-semibold underline">
+            Logue aqui!
           </Link>
         </p>
       </div>
@@ -68,4 +76,4 @@ const Login = ({user, setUser}) => {
   );
 };
 
-export default Login;
+export default Registro;

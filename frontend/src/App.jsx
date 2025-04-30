@@ -1,6 +1,7 @@
 import Header from "./components/Header"
 import Home from "./Pages/Home"
 import Login from "./Pages/login"
+import Registro from "./Pages/registro"
 import { BrowserRouter, Routes, Route  } from "react-router-dom"
 import axios from "axios";
 import { useState } from "react";
@@ -16,7 +17,8 @@ const [user, setUser] = useState(null);
 
     <Routes>
        <Route path="/" element={<Home />} />
-       <Route path="/login" element={<Login setUser = {setUser}/>} />
+       <Route path="/login" element={<Login user ={user} setUser = {setUser}/>} />
+        <Route path="/registro" element={<Registro setUser = {setUser}/>} />
     </Routes>
     </BrowserRouter>
   )
