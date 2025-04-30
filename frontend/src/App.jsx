@@ -9,6 +9,8 @@ import { useState } from "react";
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 
+axios.defaults.withCredentials = true;
+
 function App() {
 const [user, setUser] = useState(null);
   return (
