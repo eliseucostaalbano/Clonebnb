@@ -21,6 +21,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/profile", async (req, res) => {
+
+ const {token} = req.cookies;
+
+ if (token) {
+  try {
+    const userInfo = jwt.verify(token, JWT_SECRET_KEY)
+
+    res.json(userInfo);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+ } else {
+  res.json(null);
+ }
+
+});
+
+
 router.post("/", async (req, res) => {
   connectDb();
 
@@ -33,7 +52,12 @@ router.post("/", async (req, res) => {
       email,
       senha: senhaIncripitada,
     });
-    res.json(newUserDoc);
+    const { _id } = newUserDoc;
+    const novoUserObj = { nome, email, _id };
+    const token = jwt.sign(novoUserObj, JWT_SECRET_KEY);
+    
+    res.cookie("token", token).json(novoUserObj);
+
   } catch (error) {
     res.status(500).json(error);
   }
@@ -52,8 +76,6 @@ router.post("/login", async (req, res) => {
       if (senhaCorreta) {
         const novoUser = { nome, email, _id };
         const token = jwt.sign(novoUser, JWT_SECRET_KEY);
-
-        console.log({token, JWT_SECRET_KEY});
 
         res.cookie("token",token).json(novoUser);
       } else {

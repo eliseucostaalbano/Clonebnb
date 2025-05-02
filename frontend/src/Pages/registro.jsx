@@ -11,21 +11,22 @@ const Registro= ({setUser}) => {
 
   const lidarSubmit = async (e) => {
     e.preventDefault();
-//     if (email && senha) {
-//       try {
-//         const {data: User} = await axios.post("/users/login", {
-//       email,
-//       senha,
-//     })
-//     setUser(User);
-//     setRedirect(true);
-//       } catch (error) {
-//         alert(`Deu um erro ao logar: ${error.response.data}`);
-//       }
+    if (email && senha && nome) {
+      try {
+        const {data: User} = await axios.post("/users", {
+      nome,
+      email,
+      senha,
+    })
+    setUser(User);
+    setRedirect(true);
+      } catch (error) {
+        alert(`Deu um erro ao cadastrar o usuario: ${JSON.stringify(error)}`);
+      }
       
-//     }else {
-//       alert("Preencha todos os campos!");
-//     }
+    }else {
+      alert("Preencha todos os campos!");
+    }
 
 };
 
