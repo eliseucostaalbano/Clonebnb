@@ -5,6 +5,7 @@ import Registro from "./Pages/registro"
 import { BrowserRouter, Routes, Route  } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Conta from "./Pages/Conta"
 // fazer um  npm run dev tanto no frontend quanto no backend
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
@@ -32,6 +33,7 @@ const [user, setUser] = useState(null);
        <Route path="/" element={<Home />} />
        <Route path="/login" element={<Login user ={user} setUser = {setUser}/>} />
         <Route path="/registro" element={<Registro setUser = {setUser}/>} />
+        <Route path ="conta/:subpage?"element={<Conta/>} />
     </Routes>
     </BrowserRouter>
   )
