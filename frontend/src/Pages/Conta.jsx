@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import AccPerfil from '../components/AccPerfil';
 
 
-const Conta = ({user, setUser}) => {
+const Conta = () => {
   const { subpage } = useParams()
 
    const buttonClass = (button) => {
@@ -24,7 +24,7 @@ const Conta = ({user, setUser}) => {
         <Link to="/conta/lugares" className={buttonClass("lugares")}>Lugares</Link>  
         </div>
         
-        {subpage === "perfil" && <AccPerfil user={user} setUser={setUser}/>}
+        {subpage === "perfil" && <AccPerfil />}
         
       </div>
     </section>
