@@ -1,9 +1,9 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import AccPerfil from '../components/AccPerfil';
 
-// login:eliseucosta@gmail.com senha:teste
 
-const Conta = () => {
+const Conta = ({user, setUser}) => {
   const { subpage } = useParams()
 
    const buttonClass = (button) => {
@@ -17,18 +17,15 @@ const Conta = () => {
 
   return (
     <section className="p-8">
-      <div className="mx-auto max-w-7xl flex flex-col gap-4 items-center">
+      <div className="mx-auto max-w-7xl flex flex-col gap-8 items-center">
         <div className="flex gap-2">
-        <button className={buttonClass("perfil")}>Perfil</button>
-        <button className={buttonClass("reservas")}>Reservas</button>
-        <button className={buttonClass("lugares")}>Lugares</button>  
+        <Link to="/conta/perfil" className={buttonClass("perfil")}>Perfil</Link>
+        <Link to="/conta/reserva" className={buttonClass("reservas")}>Reservas</Link>
+        <Link to="/conta/lugares" className={buttonClass("lugares")}>Lugares</Link>  
         </div>
         
-        <div className="flex flex-col gap-2 items-center">
-          <p>Logado como Eliseu Costa (eliseucosta@gmail.com)</p>
-
-          <button className='rounded-full bg-primary-400 text-white min-w-44 px-4 py-2 transition cursor-pointer'>Logout</button>
-        </div>
+        {subpage === "perfil" && <AccPerfil user={user} setUser={setUser}/>}
+        
       </div>
     </section>
   )
