@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import AccPerfil from '../components/AccPerfil';
+import AccReservas from '../components/AccReservas';
+import AccLugares from '../components/AccLugares';
 
 
 const Conta = () => {
@@ -20,11 +22,13 @@ const Conta = () => {
       <div className="mx-auto max-w-7xl flex flex-col gap-8 items-center">
         <div className="flex gap-2">
         <Link to="/conta/perfil" className={buttonClass("perfil")}>Perfil</Link>
-        <Link to="/conta/reserva" className={buttonClass("reservas")}>Reservas</Link>
+        <Link to="/conta/reservas" className={buttonClass("reservas")}>Reservas</Link>
         <Link to="/conta/lugares" className={buttonClass("lugares")}>Lugares</Link>  
         </div>
         
         {subpage === "perfil" && <AccPerfil />}
+        {subpage === "reservas" && <AccReservas/>}
+        {subpage === "lugares" && <AccLugares />}
         
       </div>
     </section>

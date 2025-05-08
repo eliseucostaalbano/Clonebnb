@@ -77,9 +77,15 @@ router.post("/login", async (req, res) => {
 
       if (senhaCorreta) {
         const novoUser = { nome, email, _id };
-        const token = jwt.sign(novoUser, JWT_SECRET_KEY);
+        const token = jwt.sign(novoUser, JWT_SECRET_KEY, {}, (error, token) => {
+          if (error) {
+          console.error(error);
+          res.status(500).json(error);
+          return;
+          };
+          res.cookie("token",token).json(novoUser);
+        });
 
-        res.cookie("token",token).json(novoUser);
       } else {
         res.status(400).json("Senha incorreta");
       }
