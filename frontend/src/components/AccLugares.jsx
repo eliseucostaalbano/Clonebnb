@@ -5,7 +5,7 @@ import NovoLugar from "./NovoLugar";
 const AccLugares = () => {
     const {action} = useParams()
   return (
-    <div>
+    <div className="w-full max-w-7xl">
      {action !== "novo" ? (
         <Link
         to="/conta/lugares/novo"
