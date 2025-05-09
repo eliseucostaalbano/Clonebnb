@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Perks from "./Perks";
 
 const NovoLugar = () => {
   const [titulo, setTitulo] = useState("");
@@ -6,15 +7,22 @@ const NovoLugar = () => {
   const [foto, setFoto] = useState("");
   const [descrição, setDescrição] = useState("");
   const [extras, setExtras] = useState("");
+  const [preço, setPreço] = useState("");
+   const [checkin, setCheckin] = useState("");
+  const [checkout, setCheckout] = useState("");
+  const [convidados, setConvidados] = useState("");
+  
 
   const lidarSubmit = async (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <form onSubmit={lidarSubmit} className="flex w-full flex-col gap-6 px-8">
       <div className="flex flex-col gap-1">
-        <label htmlFor="titulo" className="ml-2 text-2xl font-bold">Título</label>
+        <label htmlFor="titulo" className="ml-2 text-2xl font-bold">
+          Título
+        </label>
         <input
           type="text"
           placeholder="Digite o título do seu anúncio"
@@ -40,7 +48,9 @@ const NovoLugar = () => {
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="fotos" className="ml-2 text-2xl font-bold">Fotos</label>
+        <label htmlFor="fotos" className="ml-2 text-2xl font-bold">
+          Fotos
+        </label>
         <div className="flex gap-2">
           <input
             type="text"
@@ -55,7 +65,10 @@ const NovoLugar = () => {
           </button>
         </div>
         <div className="mt-2 grid grid-cols-5 gap-4">
-          <label htmlFor="file" className="flex aspect-square cursor-pointer items-center justify-center gap-2 rounded-2xl border border-gray-300">
+          <label
+            htmlFor="file"
+            className="flex aspect-square cursor-pointer items-center justify-center gap-2 rounded-2xl border border-gray-300"
+          >
             <input type="file" id="file" className="hidden" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,10 +90,12 @@ const NovoLugar = () => {
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="descrição" className="ml-2 text-2xl font-bold">Descrição</label>
+        <label htmlFor="descrição" className="ml-2 text-2xl font-bold">
+          Descrição
+        </label>
         <textarea
           placeholder="Digite a descrição do seu anúncio"
-          className="rounded-2xl h-56 resize-none border border-gray-300 px-4 py-2"
+          className="h-56 resize-none rounded-2xl border border-gray-300 px-4 py-2"
           id="descrição"
           value={descrição}
           onChange={(e) => setDescrição(e.target.value)}
@@ -88,16 +103,88 @@ const NovoLugar = () => {
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="extras" className="ml-2 text-2xl font-bold">Informações extras</label>
+        <label htmlFor="perks" className="ml-2 text-2xl font-bold">
+          Comodidades
+        </label>
+        <Perks />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="extras" className="ml-2 text-2xl font-bold">
+          Informações extras
+        </label>
         <textarea
           placeholder="Coloque aqui qualquer tipo de Informação extra do seu anúncio"
-          className="rounded-2xl h-56 resize-none border border-gray-300 px-4 py-2"
+          className="h-56 resize-none rounded-2xl border border-gray-300 px-4 py-2"
           id="extras"
           value={extras}
           onChange={(e) => setExtras(e.target.value)}
         />
       </div>
-    
+      
+      <div className="flex flex-col gap-1">
+       <h2 className="ml-2 text-2xl font-bold">Restrições e Preço</h2>
+
+       <div className="grid grid-cols-[repeat(auto-fit,minmax(225px,1fr))] gap-6">
+         <div className="flex flex-col gap-2">
+            <label className="ml-2 text-xl font-bold" htmlFor="preço">
+              Preço
+            </label>
+            <input
+              type="number"
+              placeholder="500"
+              className="rounded-full border border-gray-300 px-4 py-2"
+              id="preço"
+              value={preço}
+              onChange={(e) => setPreço(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="ml-2 text-xl font-bold" htmlFor="checkin">
+              Checkin
+            </label>
+            <input
+              type="number"
+              placeholder="500"
+              className="rounded-full border border-gray-300 px-4 py-2"
+              id="checkin"
+              value={checkin}
+              onChange={(e) => setCheckin(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="ml-2 text-xl font-bold" htmlFor="checkout">
+              Checkout
+            </label>
+            <input
+              type="number"
+              placeholder="500"
+              className="rounded-full border border-gray-300 px-4 py-2"
+              id="checkout"
+              value={checkout}
+              onChange={(e) => setCheckout(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="ml-2 text-xl font-bold" htmlFor="convidados">
+              N° de convidados
+            </label>
+            <input
+              type="number"
+              placeholder="500"
+              className="rounded-full border border-gray-300 px-4 py-2"
+              id="convidados"
+              value={convidados}
+              onChange={(e) => setConvidados(e.target.value)}
+            />
+        </div>
+       </div>
+      </div>
+
+      <button className="hover:bg-primary-500 bg-primary-400 min-w-44 cursor-pointer rounded-full px-4 py-2 text-white transition">Salvar Informações</button>
     </form>
   );
 };

@@ -5,7 +5,7 @@ import NovoLugar from "./NovoLugar";
 const AccLugares = () => {
     const {action} = useParams()
   return (
-    <div className="w-full max-w-7xl">
+    <div className="w-full max-w-7xl flex flex-col items-center">
      {action !== "novo" ? (
         <Link
         to="/conta/lugares/novo"
