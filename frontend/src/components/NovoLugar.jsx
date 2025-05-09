@@ -3,46 +3,102 @@ import { useState } from "react";
 const NovoLugar = () => {
   const [titulo, setTitulo] = useState("");
   const [cidade, setCidade] = useState("");
+  const [foto, setFoto] = useState("");
+  const [descrição, setDescrição] = useState("");
+  const [extras, setExtras] = useState("");
+
+  const lidarSubmit = async (e) => {
+    e.preventDefault();
+  }
+
   return (
-    <div className="flex w-full flex-col gap-6 px-8">
+    <form onSubmit={lidarSubmit} className="flex w-full flex-col gap-6 px-8">
       <div className="flex flex-col gap-1">
-        <h2 className="ml-2 text-2xl font-bold">Título</h2>
+        <label htmlFor="titulo" className="ml-2 text-2xl font-bold">Título</label>
         <input
           type="text"
           placeholder="Digite o título do seu anúncio"
           className="rounded-full border border-gray-300 px-4 py-2"
+          id="titulo"
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
         />
       </div>
 
       <div className="flex flex-col gap-1">
-        <h2 className="ml-2 text-2xl font-bold">Cidade e país</h2>
+        <label htmlFor="cidade" className="ml-2 text-2xl font-bold">
+          Cidade e país
+        </label>
         <input
           type="text"
           placeholder="Digite a cidade e país do seu anúncio"
           className="rounded-full border border-gray-300 px-4 py-2"
+          id="cidade"
           value={cidade}
           onChange={(e) => setCidade(e.target.value)}
         />
       </div>
 
       <div className="flex flex-col gap-1">
-        <h2 className="ml-2 text-2xl font-bold">Fotos</h2>
+        <label htmlFor="fotos" className="ml-2 text-2xl font-bold">Fotos</label>
         <div className="flex gap-2">
           <input
             type="text"
-            placeholder="Adione uma foto pelo link dela"
-            className="rounded-full border border-gray-300 px-4 py-2 grow"
-            value={cidade}
-            onChange={(e) => setCidade(e.target.value)}
+            placeholder="Adicione uma foto pelo link dela"
+            className="grow rounded-full border border-gray-300 px-4 py-2"
+            id="fotos"
+            value={foto}
+            onChange={(e) => setFoto(e.target.value)}
           />
-          <button className="transition cursor-pointer rounded-full border border-gray-300 bg-gray-100 px-4 py-2 hover:bg-gray-200">
+          <button className="cursor-pointer rounded-full border border-gray-300 bg-gray-100 px-4 py-2 transition hover:bg-gray-200">
             Enviar foto
           </button>
         </div>
+        <div className="mt-2 grid grid-cols-5 gap-4">
+          <label htmlFor="file" className="flex aspect-square cursor-pointer items-center justify-center gap-2 rounded-2xl border border-gray-300">
+            <input type="file" id="file" className="hidden" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+              />
+            </svg>
+            Upload
+          </label>
+        </div>
       </div>
-    </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="descrição" className="ml-2 text-2xl font-bold">Descrição</label>
+        <textarea
+          placeholder="Digite a descrição do seu anúncio"
+          className="rounded-2xl h-56 resize-none border border-gray-300 px-4 py-2"
+          id="descrição"
+          value={descrição}
+          onChange={(e) => setDescrição(e.target.value)}
+        />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="extras" className="ml-2 text-2xl font-bold">Informações extras</label>
+        <textarea
+          placeholder="Coloque aqui qualquer tipo de Informação extra do seu anúncio"
+          className="rounded-2xl h-56 resize-none border border-gray-300 px-4 py-2"
+          id="extras"
+          value={extras}
+          onChange={(e) => setExtras(e.target.value)}
+        />
+      </div>
+    
+    </form>
   );
 };
 
