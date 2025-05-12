@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import UserRoutes from "./domains/users/routes.js";
+import PlaceRoutes from "./domains/places/routes.js";
 // fazer um  npm run dev tanto no frontend quanto no backend
 
 const app = express();
@@ -17,6 +18,8 @@ app.use(cors({
 );
 
 app.use("/users", UserRoutes);
+app.use("/lugares", PlaceRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Servidor está rodando na porta ${PORT}`);

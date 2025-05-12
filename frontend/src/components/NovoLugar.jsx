@@ -8,7 +8,7 @@ const NovoLugar = () => {
   const [descrição, setDescrição] = useState("");
   const [extras, setExtras] = useState("");
   const [preço, setPreço] = useState("");
-   const [checkin, setCheckin] = useState("");
+  const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
   const [convidados, setConvidados] = useState("");
   
