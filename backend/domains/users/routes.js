@@ -4,10 +4,11 @@ import "dotenv/config";
 import User from "./model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { JWTVerify, JWTSign } from "../../utils/jwt.js";
 
 const router = Router();
 const bcryptSalt = bcrypt.genSaltSync();
-const { JWT_SECRET_KEY } = process.env; 
+const { JWT_SECRET_KEY } = process.env;
 
 router.get("/", async (req, res) => {
   connectDb();
@@ -22,22 +23,10 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/profile", async (req, res) => {
+  const userInfo = await JWTVerify(req);
 
- const {token} = req.cookies;
-
- if (token) {
-  
-    jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) =>{
-    if (error) throw error;
-     res.json(userInfo);
-    })
-
- } else {
-  res.json(null);
- }
-
+  res.json(userInfo);
 });
-
 
 router.post("/", async (req, res) => {
   connectDb();
@@ -53,12 +42,12 @@ router.post("/", async (req, res) => {
     });
     const { _id } = newUserDoc;
     const novoUserObj = { nome, email, _id };
-    jwt.sign(novoUserObj, JWT_SECRET_KEY , {}, (error, token) =>{
-      if (error) throw error;
-  
+    try {
+      const token = await JWTSign(novoUserObj);
       res.cookie("token", token).json(novoUserObj);
-    });
-    
+    } catch (error) {
+      res.status(500).json("Erro ao assinar com o JWT", error);
+    }
   } catch (error) {
     res.status(500).json(error);
     throw error;
@@ -77,15 +66,12 @@ router.post("/login", async (req, res) => {
 
       if (senhaCorreta) {
         const novoUser = { nome, email, _id };
-        const token = jwt.sign(novoUser, JWT_SECRET_KEY, {}, (error, token) => {
-          if (error) {
-          console.error(error);
-          res.status(500).json(error);
-          return;
-          };
-          res.cookie("token",token).json(novoUser);
-        });
-
+        try {
+          const token = await JWTSign(novoUser);
+          res.cookie("token", token).json(novoUser);
+        } catch (error) {
+          res.status(500).json("Erro ao assinar com o JWT", error);
+        }
       } else {
         res.status(400).json("Senha incorreta");
       }
@@ -99,7 +85,6 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token").json("Deslogado com sucesso!");
-})
-
+});
 
 export default router;
