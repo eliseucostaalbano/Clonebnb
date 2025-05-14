@@ -15,6 +15,10 @@ const NovoLugar = () => {
 
   const lidarSubmit = async (e) => {
     e.preventDefault();
+
+    // const novolugar = await axios.post("/lugares", {
+   
+    // }); 
   };
 
   return (

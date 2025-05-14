@@ -2,7 +2,6 @@ import "dotenv/config";
 import jwt from "jsonwebtoken";
 
 const { JWT_SECRET_KEY } = process.env;
-
 export const JWTVerify = (req) => {
   const { token } = req.cookies;
 
@@ -10,9 +9,10 @@ export const JWTVerify = (req) => {
     return new Promise((resolve, reject) => {
       jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) => {
         if (error) {
-          console.error("Deu algum erro ao verificar com o JWT::", error);
+          console.error("Deu algum erro ao verificar com o JWT:", error);
           reject(error);
         }
+
         resolve(userInfo);
       });
     });
